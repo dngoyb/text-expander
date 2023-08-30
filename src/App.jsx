@@ -33,6 +33,29 @@ export default function App() {
 	);
 }
 
-function TextExpander({ children }) {
-	return <div>{children}</div>;
+function TextExpander({
+	children,
+	collapsedNumWords,
+	collapseButtonText = 'Show less',
+	expandButtonText = 'Show more',
+	buttonColor,
+	className,
+	expanded = false,
+}) {
+	const [isExpanded, setIsExpanded] = useState(expanded);
+
+	const displayText = isExpanded ? children : 'test';
+
+	return (
+		<div className={className}>
+			<span>{displayText}</span>
+			<span>
+				<button
+					className={buttonColor}
+					onClick={() => setIsExpanded((expanded) => !expanded)}>
+					{isExpanded ? collapseButtonText : expandButtonText}
+				</button>
+			</span>
+		</div>
+	);
 }
